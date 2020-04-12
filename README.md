@@ -1,6 +1,11 @@
 # NightbotSpeedrunCommands
 Some nightbot commands for integrating speedrun.com into twitch for twitch.tv/zoochable
 
+Commands:
+!pb - displays all the speedrun.com submitted personal bests for user Zoochable in game Portal
+!wr [category] - displays the world record in Portal for a given category: 
+                 need to input exactly as the category name appears in speedrun.com urls not case sensative (e.x. glitchless, inbounds_no_sla, inbounds, out_of_bounds, etc.)
+
 
 To use with your stream:
 1. Add nightbot to your stream (google how to do it I'm to lazy to tell you right here)
