@@ -1,5 +1,6 @@
 // -------------------------------------------------------------
 // !pb
+// 4pd0n31e is the speedrun.com id for Portal 1
 
 $(eval 
 var api=$(urlfetch json https://speedrun.com/api/v1/users/Zoochable/personal-bests);
@@ -22,6 +23,8 @@ out
 
 // --------------------------------------------------------------
 // !wr helper
+// helper for !wr, !wr helper should alias to this
+// I could probably add a 3rd paramater to get the minutes and eliminate the second leaderboards urlfetch
 
 $(eval 
 var wr = $(urlfetch json https://speedrun.com/api/v1/leaderboards/portal/category/$(2)?top=1);
@@ -37,6 +40,7 @@ var padded = seconds.padStart(5, '0');
 
 // ----------------------------------------------------------------
 //!wr
+// set alias to !wrhelper
 $(eval 
 var wr=$(urlfetch json https://speedrun.com/api/v1/leaderboards/portal/category/$(query)?top=1);
 var wrplayerid=wr['data']['runs'][0]['run']['players'][0]['id'];
