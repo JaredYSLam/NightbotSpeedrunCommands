@@ -22,14 +22,11 @@ out
 )
 
 // --------------------------------------------------------------
-// !wr helper
-// helper for !wr, !wr helper should alias to this
-// I could probably add a 3rd paramater to get the minutes and eliminate the second leaderboards urlfetch
+// !wrhelper
+// helper for !wr
 
 $(eval 
-var wr = $(urlfetch json https://speedrun.com/api/v1/leaderboards/portal/category/$(2)?top=1);
-var wrrun = wr['data']['runs'][0]['run'];
-var wrtime = wrrun['times']['primary_t'];
+var wrtime = parseFloat($(3));
 var player=$(urlfetch json $(1)); 
 var playername = player['data']['names']['international'];
 var minutes = Math.floor(wrtime/60);
@@ -43,7 +40,9 @@ var padded = seconds.padStart(5, '0');
 // set alias to !wrhelper
 $(eval 
 var wr=$(urlfetch json https://speedrun.com/api/v1/leaderboards/portal/category/$(query)?top=1);
-var wrplayerid=wr['data']['runs'][0]['run']['players'][0]['id'];
-`https://speedrun.com/api/v1/users/${wrplayerid} $(query)`;
+var wrrun = wr['data']['runs'][0]['run'];
+var wrplayerid=wrrun['players'][0]['id'];
+var wrtime = wrrun['times']['primary_t'];
+`https://speedrun.com/api/v1/users/${wrplayerid} $(query) ${wrtime}`
 )
 
