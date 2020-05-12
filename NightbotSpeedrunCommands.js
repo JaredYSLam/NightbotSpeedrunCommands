@@ -1,25 +1,19 @@
 // -------------------------------------------------------------
 // !pbhelper
 // 4pd0n31e is the speedrun.com id for Portal 1
-// called from !pb which returns https://speedrun.com/api/v1/users/Zoochable/personal-bests https://speedrun.com/api/v1/games/Portal/categories
+// called from !pb which returns https://speedrun.com/api/v1/users/Zoochable/personal-bests?embed=game,category
 $(eval 
 var a=$(urlfetch json $(1));
-var cs=$(urlfetch json $(2));
-var cIs={};
-for(var c in cs['data']){
-    var d=cs['data'][c];
-    cIs[d['id']]=d['name'];
-}
 var out="My PBs: ";
 for(var pb in a['data']){
-    var r=a['data'][pb]['run'];
-    if(r['game'] === "4pd0n31e"){
-        var t=r['times']['primary_t'];
+    var r=a['data'][pb];
+    if(r.run.game === "4pd0n31e" && r.category.data.type === "per-game"){
+        var t=r.run.times.primary_t;
         var m=Math.floor(t/60);
         var sc=Math.round((t-60*m)*100)/100+"";
         var sm=sc.split('.');
         var pd=`${sm[0].padStart(2,'0')}.${sm[1].padEnd(2,'0')}`;
-        out+=cIs[r['category']]+`: ${m}:${pd} `;
+        out+=r.category.data.name+`: ${m}:${pd} `;
     }
 }
 out
